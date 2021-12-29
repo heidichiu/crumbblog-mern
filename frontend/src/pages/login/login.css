@@ -1,0 +1,60 @@
+.login {
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    url(https://cdn.pixabay.com/photo/2017/12/31/09/34/book-3051871_960_720.jpg);
+  background-size: cover;
+}
+
+.login-title {
+  font-size: 50px;
+}
+
+.login-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form > label {
+  margin: 10px 0;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.login-input {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid rgb(173, 173, 173);
+  margin-bottom: 10px;
+}
+
+.login-input:focus {
+  outline: none;
+  border-bottom: 1px solid rgb(75, 75, 75);
+}
+
+.login-button {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: teal;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.login-register-button {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: lightcoral;
+  cursor: pointer;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
