@@ -29,7 +29,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
 });
 
 // delete user
-router.put("/:id", authenticateToken, async (req, res) => {
+router.delete("/:id", authenticateToken, async (req, res) => {
   if (req.user.userId == req.params.id) {
     try {
       const user = await User.findById(req.params.id);
