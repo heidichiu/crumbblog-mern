@@ -33,8 +33,8 @@ router.post("/login", async (req, res) => {
     !validate && res.status(400).json("Your password is wrong.");
 
     const { password, ...others } = user._doc;
-    const accessToken = generateAccessToken(user.username);
-    const refreshToken = generateRefreshToken(user.username);
+    const accessToken = generateAccessToken(user.username, user._id);
+    const refreshToken = generateRefreshToken(user.username, user._id);
     response = { accessToken, refreshToken, ...others };
 
     tokenList.push(refreshToken);
@@ -44,12 +44,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
-const generateAccessToken = (username) => {
-  return jwt.sign({ username }, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: 900 });
+const generateAccessToken = (username, userId) => {
+  return jwt.sign({ username, userId }, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: 900 });
 };
 
-const generateRefreshToken = (username) => {
-  return jwt.sign({ username }, process.env.JWT_REFRESH_TOKEN_SECRET);
+const generateRefreshToken = (username, userId) => {
+  return jwt.sign({ username, userId }, process.env.JWT_REFRESH_TOKEN_SECRET);
 };
 
 // a middleware for authentication
