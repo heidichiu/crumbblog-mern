@@ -5,7 +5,6 @@ const PostSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     description: {
       type: String,
@@ -15,7 +14,7 @@ const PostSchema = new mongoose.Schema(
       type: Buffer,
       required: false,
     },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    username: { type: String, required: true },
     categories: {
       type: Array,
       required: false,
