@@ -53,25 +53,25 @@ const generateRefreshToken = (username) => {
 };
 
 // a middleware for authentication
-const authenticateToken = (req, res, next) => {
+function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  if (token == null) return res.sendStatus(401);
+  if (token == null) return res.status(401).json("You are not authenticated.");
 
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET, (err, user) => {
     console.log(err);
 
-    if (err) return res.sendStatus(403);
+    if (err) return res.status(403).json("Token is not valid.");
 
     req.user = user;
 
     next();
   });
-};
+}
 
 // refresh token
-app.post("/token/refresh", (req, res) => {
+router.post("/token/refresh", (req, res) => {
   //take the refresh token from the user
   const refreshToken = req.body.token;
 
@@ -97,3 +97,4 @@ app.post("/token/refresh", (req, res) => {
 });
 
 module.exports = router;
+module.exports.authenticateToken = authenticateToken;
