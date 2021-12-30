@@ -20,6 +20,8 @@ const UserSchema = new mongoose.Schema(
       type: Buffer,
       default: "",
     },
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
   },
   { timestamps: true }
 );

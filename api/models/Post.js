@@ -15,10 +15,7 @@ const PostSchema = new mongoose.Schema(
       type: Buffer,
       required: false,
     },
-    username: {
-      type: String,
-      required: true,
-    },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     categories: {
       type: Array,
       required: false,
