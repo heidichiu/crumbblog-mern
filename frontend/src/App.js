@@ -7,9 +7,11 @@ import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/authContext/authContext";
 
 function App() {
-  const user = false;
+  const { user } = useContext(AuthContext);
   return (
     <Router>
       <TopBar />
