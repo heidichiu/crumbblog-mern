@@ -13,11 +13,11 @@ export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   useEffect(() => {
-    localStorage.setItem("usre", JSON.stringify(state.user));
+    localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);
 
   return (
-    <ContextProvider
+    <AuthContext.Provider
       value={{
         user: state.user,
         isFetching: state.isFetching,
@@ -26,6 +26,6 @@ export const ContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </ContextProvider>
+    </AuthContext.Provider>
   );
 };
