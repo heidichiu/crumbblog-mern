@@ -49,8 +49,6 @@ export const TopBar = () => {
             </li>
           </ul>
         )}
-
-        <i className="top-search-icon fas fa-search"></i>
       </div>
     </div>
   );
