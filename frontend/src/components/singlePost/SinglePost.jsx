@@ -11,18 +11,34 @@ export const SinglePost = () => {
   const [post, setPost] = useState({});
   const { user } = useContext(AuthContext);
   let history = useHistory();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [updateMode, setUpdateMode] = useState(false);
 
   const handleDelete = async () => {
     try {
       await axios.delete("/posts/" + postId);
       history.push("/");
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      await axios.put(`/posts/${post._id}`, { username: user.username, title, description });
+      setUpdateMode(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/posts/" + postId);
       setPost(res.data);
+      setTitle(res.data.title);
+      setDescription(res.data.description);
     };
     getPost();
   }, [postId]);
@@ -31,15 +47,26 @@ export const SinglePost = () => {
     <div className="single-post">
       <div className="single-post-wrapper">
         {post.image && <img src={`${hostUrl}images/${post.image}`} alt="" className="single-post-image" />}
-        <h1 className="single-post-title">
-          {post.title}
-          {post.username === user?.username && (
-            <div className="single-post-edit-container">
-              <i className="single-post-icon far fa-edit"></i>
-              <i className="single-post-icon fas fa-trash" onClick={handleDelete}></i>
-            </div>
-          )}
-        </h1>
+        {updateMode ? (
+          <input
+            type="text"
+            value={title}
+            className="single-post-title-input"
+            autoFocus
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        ) : (
+          <h1 className="single-post-title">
+            {title}
+            {post.username === user?.username && (
+              <div className="single-post-edit-container">
+                <i className="single-post-icon far fa-edit" onClick={() => setUpdateMode(true)}></i>
+                <i className="single-post-icon fas fa-trash" onClick={handleDelete}></i>
+              </div>
+            )}
+          </h1>
+        )}
+
         <div className="single-post-info">
           <span className="single-post-author">
             Author:
@@ -51,7 +78,20 @@ export const SinglePost = () => {
             Date: <b>{new Date(post.createdAt).toDateString()}</b>
           </span>
         </div>
-        <p className="single-post-description">{post.description}</p>
+        {updateMode ? (
+          <textarea
+            className="single-post-description-input"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        ) : (
+          <p className="single-post-description">{description}</p>
+        )}
+        {updateMode && (
+          <button className="single-post-button" onClick={handleUpdate}>
+            Update
+          </button>
+        )}
       </div>
     </div>
   );

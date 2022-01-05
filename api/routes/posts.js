@@ -27,7 +27,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     try {
-      if (req.user.username === post.username) {
+      if (req.body.username === post.username) {
         try {
           const updatedPost = await Post.findByIdAndUpdate(
             req.params.id,
