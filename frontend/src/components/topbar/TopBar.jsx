@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { hostUrl } from "../../api";
 import { logout } from "../../context/authContext/authActions";
 import { AuthContext } from "../../context/authContext/authContext";
 import "./topbar.css";
@@ -45,7 +46,9 @@ export const TopBar = () => {
       </div>
       <div className="top-right">
         {user ? (
-          <img className="top-image" src={user.profilePic} alt="" />
+          <Link to="/settings" className="link">
+            <img className="top-image" src={`${hostUrl}images/${user.profilePic}`} alt="" />
+          </Link>
         ) : (
           <ul className="top-list">
             <li className="top-list-item">
