@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const hostUrl = "http://localhost:5000/";
+
 //request interceptor to add the auth token header to requests
 axios.interceptors.request.use(
   (config) => {
@@ -24,7 +26,7 @@ axios.interceptors.response.use(
     const originalRequest = error.config;
     let user = JSON.parse(localStorage.getItem("user"));
     let refreshToken = user ? user.refreshToken : null;
-    if (refreshToken && error.response.status === 401 && !originalRequest._retry) {
+    if (refreshToken && (error.response.status === 401 || error.response.status === 403) && !originalRequest._retry) {
       originalRequest._retry = true;
       return axios.post(`/auth/token/refresh`, { token: refreshToken }).then((res) => {
         if (res.status === 200) {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "../../api";
 import "./singlePost.css";
+import { hostUrl } from "../../api";
 
 export const SinglePost = () => {
   const location = useLocation();
@@ -19,7 +20,7 @@ export const SinglePost = () => {
   return (
     <div className="single-post">
       <div className="single-post-wrapper">
-        {post.image && <img src={post.image} alt="" className="single-post-image" />}
+        {post.image && <img src={`${hostUrl}images/${post.image}`} alt="" className="single-post-image" />}
         <h1 className="single-post-title">
           {post.title}
           <div className="single-post-edit-container">

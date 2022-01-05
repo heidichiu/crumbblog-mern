@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import "./post.css";
+import { hostUrl } from "../../api";
 
 export const Post = ({ post }) => {
   return (
     <div className="post">
-      {post.image && <img src={post.image} alt="" className="post-image" />}
+      {post.image && <img src={`${hostUrl}images/${post.image}`} alt="" className="post-image" />}
       <div className="post-info">
         <div className="post-categories">
           {post.categoris && post.categoris.map((c) => <span className="post-category">{c.name}</span>)}

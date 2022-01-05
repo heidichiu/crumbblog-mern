@@ -23,7 +23,7 @@ export const CreatePost = () => {
 
     if (file) {
       const data = new FormData();
-      const filename = Date.now() + file.name;
+      const filename = new Date().toISOString().replace(/:/g, "-") + file.name;
       data.append("name", filename);
       data.append("file", file);
       newPost.image = filename;
