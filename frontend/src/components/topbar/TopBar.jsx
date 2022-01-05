@@ -1,8 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { logout } from "../../context/authContext/authActions";
+import { AuthContext } from "../../context/authContext/authContext";
 import "./topbar.css";
 
 export const TopBar = () => {
-  const user = false;
+  const { user, dispatch } = useContext(AuthContext);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div className="top">
       <div className="top-left">
@@ -32,16 +38,14 @@ export const TopBar = () => {
               Create Post
             </Link>
           </li>
-          <li className="top-list-item">
-            <Link className="link" to="/">
-              {user && "Logout"}
-            </Link>
+          <li className="top-list-item" onClick={handleLogout}>
+            {user && "Logout"}
           </li>
         </ul>
       </div>
       <div className="top-right">
         {user ? (
-          <img className="top-image" src="https://cdn.pixabay.com/photo/2015/03/03/18/58/woman-657753_960_720.jpg" alt="" />
+          <img className="top-image" src={user.profilePic} alt="" />
         ) : (
           <ul className="top-list">
             <li className="top-list-item">
