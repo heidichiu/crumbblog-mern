@@ -6,7 +6,7 @@ axios.interceptors.request.use(
     const user = JSON.parse(localStorage.getItem("user"));
     const accessToken = user ? user.accessToken : null;
     if (accessToken) {
-      config.headers["x-auth-token"] = accessToken;
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -30,7 +30,7 @@ axios.interceptors.response.use(
         if (res.status === 200) {
           user.refreshToken = res.data.refreshToken;
           user.accessToken = res.data.accessToken;
-          localStorage.setItem("user", user);
+          localStorage.setItem("user", JSON.stringify(user));
           console.log("Access token refreshed!");
           return axios(originalRequest);
         }

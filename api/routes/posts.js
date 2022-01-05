@@ -6,15 +6,16 @@ const { authenticateToken } = require("./auth");
 
 // create post
 router.post("/", authenticateToken, async (req, res) => {
-  const newPost = new Post({ ...req.body, username: req.user.username });
+  const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
 
     // add post to user
-    const user = await User.findById(req.user.userId);
-    user.posts.push(savedPost);
-    await user.save();
-
+    const user = await User.find({ username: req.body.username });
+    if (user.length > 0) {
+      user[0].posts.push(savedPost);
+      await user[0].save();
+    }
     res.status(200).json(savedPost);
   } catch (err) {
     res.status(500).json(err);
