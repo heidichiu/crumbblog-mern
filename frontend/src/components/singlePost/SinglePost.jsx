@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../../api";
 import "./singlePost.css";
 
 export const SinglePost = () => {
