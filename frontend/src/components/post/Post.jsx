@@ -1,29 +1,22 @@
+import { Link } from "react-router-dom";
 import "./post.css";
 
-export const Post = () => {
+export const Post = ({ post }) => {
   return (
     <div className="post">
-      <img
-        src="https://images.pexels.com/photos/5469811/pexels-photo-5469811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        alt=""
-        className="post-image"
-      />
+      {post.image && <img src={post.image} alt="" className="post-image" />}
       <div className="post-info">
         <div className="post-categories">
-          <span className="post-category">Music</span>
-          <span className="post-category">Life</span>
+          {post.categoris && post.categoris.map((c) => <span className="post-category">{c.name}</span>)}
         </div>
-        <span className="post-title">Lorem ipsum dolor sit amet</span>
 
+        <Link to={`/post/${post._id}`} className="link">
+          <span className="post-title">{post.title}</span>
+        </Link>
         <hr />
-        <span className="post-date">1 hour ago</span>
+        <span className="post-date">{new Date(post.createdAt).toDateString()}</span>
       </div>
-      <p className="post-description">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia nihil impedit qui velit tenetur aperiam labore
-        repellendus ab, sit sunt saepe molestias nostrum quia corporis nesciunt odit. Vero esse praesentium placeat quae
-        asperiores at omnis autem ut maxime harum! Debitis fuga nihil corrupti aut, distinctio, nesciunt, similique ipsa
-        repellendus consequuntur molestias quis rerum eius esse provident!
-      </p>
+      <p className="post-description">{post.description}</p>
     </div>
   );
 };
