@@ -21,7 +21,6 @@ const UserSchema = new mongoose.Schema(
       default: "",
     },
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
   },
   { timestamps: true }
 );
