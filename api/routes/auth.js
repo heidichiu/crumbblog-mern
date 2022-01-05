@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 
-let tokenList = [];
+let refreshTokens = [];
 
 dotenv.config();
 
@@ -77,7 +77,7 @@ router.post("/token/refresh", (req, res) => {
 
   //send error if there is no token or it's invalid
   if (!refreshToken) return res.status(401).json("You are not authenticated.");
-  if (!refreshToken in tokenList) {
+  if (!refreshToken in refreshTokens) {
     return res.status(403).json("Your refresh token is not valid.");
   }
   jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET, (err, user) => {
