@@ -12,26 +12,12 @@ export const TopBar = () => {
   };
   return (
     <div className="top">
-      <div className="top-left">
-        <i className="top-icon fab fa-twitter-square"></i>
-        <i className="top-icon fab fa-facebook-square"></i>
-        <i className="top-icon fab fa-instagram-square"></i>
-      </div>
+      <div className="top-left">CrumbBlog</div>
       <div className="top-center">
         <ul className="top-list">
           <li className="top-list-item">
             <Link className="link" to="/">
               Home
-            </Link>
-          </li>
-          <li className="top-list-item">
-            <Link className="link" to="/">
-              About
-            </Link>
-          </li>
-          <li className="top-list-item">
-            <Link className="link" to="/">
-              Contact
             </Link>
           </li>
           <li className="top-list-item">

@@ -4,8 +4,8 @@ export const Header = () => {
   return (
     <div className="header">
       <div className="header-titles">
-        <span className="header-title-sm">React & Node</span>
-        <span className="header-title-lg">Blog</span>
+        <span className="header-title-lg">CrumbBlog</span>
+        <span className="header-title-sm">A place to share your life</span>
       </div>
       <img
         className="header-image"
