@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
     const refreshToken = generateRefreshToken(user.username, user._id);
     response = { accessToken, refreshToken, ...others };
 
-    tokenList.push(refreshToken);
+    refreshTokens.push(refreshToken);
     res.status(200).json(response);
   } catch (err) {
     res.status(500).json(err);
