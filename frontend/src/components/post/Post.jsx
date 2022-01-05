@@ -16,6 +16,7 @@ export const Post = ({ post }) => {
         </Link>
         <hr />
         <span className="post-date">{new Date(post.createdAt).toDateString()}</span>
+        <span className="post-author">Author: {post.username}</span>
       </div>
       <p className="post-description">{post.description}</p>
     </div>

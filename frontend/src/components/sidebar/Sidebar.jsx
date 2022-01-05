@@ -15,7 +15,7 @@ export const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-item">
-        <span className="sidebar-title">Top Categories</span>
+        <span className="sidebar-title">Top Tags</span>
         <ul className="sidebar-list">
           {cats.map((c) => (
             <Link to={`/?category=${c.name}`} className="link">

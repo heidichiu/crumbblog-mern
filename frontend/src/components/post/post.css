@@ -33,6 +33,12 @@
   cursor: pointer;
 }
 
+.post-author {
+  font-family: "Josefin Sans", sans-serif;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
 .post-date {
   font-family: "Lora", serif;
   font-style: italic;
